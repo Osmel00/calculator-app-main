@@ -23,10 +23,9 @@ let screenResult = document.getElementById("result");
 let main_body = document.body;
 const arrayKeyNummber = [...keyboard_numbers];
 const arrayKeyShadows = [...keyboard_borders];
-let result;
+let resultAux;
 let arrayOperation = new Array();
 console.log(arrayOperation);
-
 
 const keyValues = document.querySelectorAll(".pararaph-num");
 //console.log(keyValues);
@@ -40,28 +39,27 @@ keyValues.forEach((item) => {
 
 function calcAll(itemKey) {
   switch (itemKey) {
-    case "del": auxRemoveAll();
-      
+    case "del":
       break;
-    case "+": addition();
-      
+    case "+":
+      addition();
+
       break;
-    
-      case "-":
+
+    case "-":
       break;
     case "x":
       break;
     case "reset":
+      auxRemoveAll();
       break;
     case "=":
+      console.log(itemKey);
+      equalOperation();
       break;
     case "/":
       break;
     case ".":
-      break;
-      case "reset":
-      break;
-      case "equal": equalOperation();
       break;
     default:
       screenResult.value += itemKey;
@@ -71,7 +69,7 @@ function calcAll(itemKey) {
 }
 function auxRemoveAll() {
   //clear the screen
-  result = "";
+  resultAux = "";
   screenResult.value = "";
   arrayOperation = [];
   console.log("boton Eliminar" + ":" + arrayOperation.length);
@@ -82,21 +80,12 @@ function check(itemKey) {
   if (arrayOperation.length == 2) {
     screenResult.value = itemKey;
     arrayOperation.push(itemKey);
+    console.log(arrayOperation);
   }
-  /*if (arrayOperation.length == 3) {
-    //recorro arreglo busco el signo de operacion y se resuelvo la ecuacion
-    arrayOperation.find((item) => {
-      if (item == "+") {
-        screenResult.value = sum(arrayOperation[0], itemKey);
-      }
-    });
-  }*/
 }
 
 function sum(item_a, item_b) {
-  console.log(typeof item_a);
-   return Number(item_a ) + Number(item_b );
-  
+  return Number(item_a) + Number(item_b);
 }
 
 function addition() {
@@ -107,29 +96,35 @@ function addition() {
     }
   }
   if (arrayOperation.length == 3) {
-    
-        let suma = sum(arrayOperation[0],arrayOperation[2] );
-        screenResult.value = suma;
-        arrayOperation = [0];
-        arrayOperation.push(suma);
+    arrayOperation[2] = screenResult.value;
+    resultAux = arrayOperation[0];
+    let suma = sum(arrayOperation[0], arrayOperation[2]);
+    screenResult.value = suma;
+    arrayOperation = [];
+    arrayOperation.push(suma);
+    arrayOperation.push("+");
+  }
 
-      
-      } 
-  
+  //arrayOperation.push(suma);
 
-  console.log("boton adicionar" + ":" + arrayOperation);
-  
+  //console.log("boton adicionar" + ":" + arrayOperation.length);
 }
 
-function equalOperation(){
+function equalOperation() {
+  if (arrayOperation.length == 3) {
+    switch (arrayOperation[1]) {
+      case "+":
+        let valueSum = sum(arrayOperation[0], arrayOperation[2]);
+        screenResult.value = valueSum;
+        break;
 
-  arrayOperation.find((item) => {
-    if (item == "+") {
-      screenResult.value = sum(arrayOperation[0], itemKey);
+      default:
+        break;
     }
-  });
-}
+  }
 
+  arrayOperation = [];
+}
 
 switch_2.addEventListener("click", () => {
   updateTheme(switchPositions()); // Change the themes
