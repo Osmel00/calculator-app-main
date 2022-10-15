@@ -25,15 +25,15 @@ const arrayKeyNummber = [...keyboard_numbers];
 const arrayKeyShadows = [...keyboard_borders];
 let resultAux;
 let arrayOperation = new Array();
-console.log(arrayOperation);
 
-const keyValues = document.querySelectorAll(".pararaph-num");
+const keyValues = document.querySelectorAll(".keyValues");
 //console.log(keyValues);
 
 keyValues.forEach((item) => {
   item.addEventListener("click", () => {
-    calcAll(item.innerHTML);
-    //screenResult.value += item.innerHTML;
+  
+    calcAll(item.lastElementChild.innerHTML);
+    
   });
 });
 
@@ -42,32 +42,43 @@ function calcAll(itemKey) {
     case "del":
       break;
     case "+":
-      addition();
-
+      additionOperation();
       break;
 
     case "-":
       break;
     case "x":
       break;
-    case "reset":
-      auxRemoveAll();
+    case "reset": resetOperation();
       break;
     case "=":
-      console.log(itemKey);
-      equalOperation();
       break;
     case "/":
       break;
     case ".":
       break;
     default:
-      screenResult.value += itemKey;
+      if (itemKey!= 0 ) {
+        screenResult.value += itemKey;
+      } else {
+        screenResult.value = "";
+      }
+      
       check(itemKey);
       break;
   }
 }
-function auxRemoveAll() {
+
+function delOperation() {
+  if (arrayOperation.length == 0) {
+    screenResult.value = "";
+  }
+  if (arrayOperation.length == 3) {
+    arrayOperation.pop();
+    screenResult.value = 0;
+  }
+}
+function resetOperation() {
   //clear the screen
   resultAux = "";
   screenResult.value = "";
@@ -82,32 +93,41 @@ function check(itemKey) {
     arrayOperation.push(itemKey);
     console.log(arrayOperation);
   }
+  if (arrayOperation.length == 4) {
+     screenResult.value = itemKey;
+    
+  }
 }
 
 function sum(item_a, item_b) {
   return Number(item_a) + Number(item_b);
 }
 
-function addition() {
-  if (arrayOperation.length == 0) {
+function additionOperation() {
+  if (arrayOperation.length == 0 && screenResult.value != 0) {
+        
     arrayOperation.push(screenResult.value);
-    if (arrayOperation[arrayOperation.length - 1] != "+") {
-      arrayOperation.push("+");
-    }
-  }
-  if (arrayOperation.length == 3) {
-    arrayOperation[2] = screenResult.value;
-    resultAux = arrayOperation[0];
-    let suma = sum(arrayOperation[0], arrayOperation[2]);
-    screenResult.value = suma;
-    arrayOperation = [];
-    arrayOperation.push(suma);
     arrayOperation.push("+");
   }
+    
+  
+  if(arrayOperation.length == 3) {
+    arrayOperation.push("+");
+    resultAux = sum(arrayOperation[0],arrayOperation[2]);
+    console.log(resultAux);
+    screenResult.value = resultAux;
+  } else if (arrayOperation.length == 4) {
+    
+    screenResult.value = sum(resultAux,screenResult.value);   
+    arrayOperation =[];
+    arrayOperation.push(screenResult.value);
+    arrayOperation.push("+"); 
+  }
 
-  //arrayOperation.push(suma);
 
-  //console.log("boton adicionar" + ":" + arrayOperation.length);
+  
+
+  console.log(arrayOperation);
 }
 
 function equalOperation() {
@@ -122,9 +142,12 @@ function equalOperation() {
         break;
     }
   }
-
-  arrayOperation = [];
 }
+
+
+
+
+
 
 switch_2.addEventListener("click", () => {
   updateTheme(switchPositions()); // Change the themes
@@ -223,7 +246,6 @@ function updateTheme(num_theme) {
     case 1:
       deleteTheme_1();
       break;
-
     case 2:
       deleteTheme_2();
       break;
