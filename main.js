@@ -31,6 +31,7 @@ const keyValues = document.querySelectorAll(".keyValues");
 
 keyValues.forEach((item) => {
   item.addEventListener("click", () => {
+    
   
     calcAll(item.lastElementChild.innerHTML);
     
@@ -39,6 +40,7 @@ keyValues.forEach((item) => {
 
 function calcAll(itemKey) {
   switch (itemKey) {
+   
     case "del":
       break;
     case "+":
@@ -47,8 +49,10 @@ function calcAll(itemKey) {
 
     case "-":
       break;
-    case "x":
+
+    case "x": multiOperation();
       break;
+
     case "reset": resetOperation();
       break;
     case "=":
@@ -56,15 +60,24 @@ function calcAll(itemKey) {
     case "/":
       break;
     case ".":
-      break;
-    default:
-      if (itemKey!= 0 ) {
+      break; 
+      default:
+      if(itemKey == 0 && arrayOperation.length ==0)  {
+        screenResult.value = "";
+      } else  if (arrayOperation.length!=0 && arrayOperation[0] == screenResult.value) {
+        screenResult.value = "";
+        screenResult.value = itemKey;
+      } else {
+        screenResult.value += itemKey;
+      }
+    
+    /*if (itemKey!= 0 ) {
         screenResult.value += itemKey;
       } else {
         screenResult.value = "";
       }
       
-      check(itemKey);
+      check(itemKey);*/
       break;
   }
 }
@@ -124,11 +137,50 @@ function additionOperation() {
     arrayOperation.push("+"); 
   }
 
+  console.log(arrayOperation);
+}
 
   
 
-  console.log(arrayOperation);
+  
+
+
+function multiOperation() {                 /////////////// estoy aqui.**************************************////////
+    
+  if (arrayOperation.length == 0 && screenResult.value == 0) {
+        
+    arrayOperation.push(0);
+    arrayOperation.push("x");
+  }
+  
+
+
+  if (arrayOperation.length == 0 && screenResult.value != 0) {
+        
+    arrayOperation.push(screenResult.value);
+    arrayOperation.push("x");
+  } else if (arrayOperation.length ==3 && arrayOperation[0] == 0) {
+    
+    arrayOperation.pop();
+    screenResult.value = "";
+  } else if (arrayOperation.length ==3 && arrayOperation[0] != 0) {
+
+    //llamar a la funcion multiplicar
+    let resultTempory = multiAux(arrayOperation[0],arrayOperation[2]);
+    arrayOperation = [];
+    arrayOperation.push(resultTempory);
+    arrayOperation.push("x");
+    screenResult.value = resultTempory;
+  }
+     
+   console.log(arrayOperation);
 }
+
+function multiAux(item_a , item_b) {
+  
+  return Number(item_a) * Number(item_b);
+}
+
 
 function equalOperation() {
   if (arrayOperation.length == 3) {
