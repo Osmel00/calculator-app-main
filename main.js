@@ -25,6 +25,9 @@ const arrayKeyNummber = [...keyboard_numbers];
 const arrayKeyShadows = [...keyboard_borders];
 let resultAux;
 let arrayOperation = new Array();
+let int = "";
+let value = "";
+ //console.log(eval('1+3*7-2'));
 
 const keyValues = document.querySelectorAll(".keyValues");
 //console.log(keyValues);
@@ -62,24 +65,16 @@ function calcAll(itemKey) {
     case ".":
       break; 
       default:
-      if(itemKey == 0 && arrayOperation.length ==0)  {
-        screenResult.value = "";
-      } else  if (arrayOperation.length!=0 && arrayOperation[0] == screenResult.value) {
-        screenResult.value = "";
-        screenResult.value = itemKey;
-      } else {
+        
+   
         screenResult.value += itemKey;
-      }
-    
-    /*if (itemKey!= 0 ) {
-        screenResult.value += itemKey;
-      } else {
-        screenResult.value = "";
-      }
       
-      check(itemKey);*/
+      var s = screenResult.value;
+      screenResult.value = Number(s);
+      
       break;
   }
+  
 }
 
 function delOperation() {
@@ -117,26 +112,10 @@ function sum(item_a, item_b) {
 }
 
 function additionOperation() {
-  if (arrayOperation.length == 0 && screenResult.value != 0) {
-        
-    arrayOperation.push(screenResult.value);
-    arrayOperation.push("+");
-  }
-    
-  
-  if(arrayOperation.length == 3) {
-    arrayOperation.push("+");
-    resultAux = sum(arrayOperation[0],arrayOperation[2]);
-    console.log(resultAux);
-    screenResult.value = resultAux;
-  } else if (arrayOperation.length == 4) {
-    
-    screenResult.value = sum(resultAux,screenResult.value);   
-    arrayOperation =[];
-    arrayOperation.push(screenResult.value);
-    arrayOperation.push("+"); 
-  }
-
+ resultTempory = screenResult.value += " " + "+" + " " ;
+ arrayOperation = resultTempory.split(" ");
+ int = "";
+ value = ""; 
   console.log(arrayOperation);
 }
 
@@ -147,34 +126,54 @@ function additionOperation() {
 
 function multiOperation() {                 /////////////// estoy aqui.**************************************////////
     
+  let resultTempory = "";
   if (arrayOperation.length == 0 && screenResult.value == 0) {
         
     arrayOperation.push(0);
     arrayOperation.push("x");
-  }
+   } else if (arrayOperation.length == 0 && screenResult.value != 0){
+    arrayOperation.push(screenResult.value);
+    arrayOperation.push("x");
+   }
+   else if (arrayOperation.length == 2) {
+        
+    if(arrayOperation[0] == "0"){
+     arrayOperation = [];
+     arrayOperation.push(0);
+     arrayOperation.push("x");
+     screenResult.value = "";
+    }  else {
+         // llamar funcion multiplicar
+       resultTempory = multiAux(arrayOperation[0],screenResult.value)
+       arrayOperation = [];
+       arrayOperation.push(resultTempory);
+       arrayOperation.push("x");
+       screenResult.value = resultTempory;
+    }
+   
+   
+
+ } else if (arrayOperation.length == 4 && arrayOperation[0] == 0) {
+   
+   arrayOperation.pop();
+   arrayOperation.pop();
+   screenResult.value = "";
+ } else if (arrayOperation.length ==3 && arrayOperation[0] != 0) {
+
+   //llamar a la funcion multiplicar
+   resultTempory = multiAux(arrayOperation[0],arrayOperation[2]);
+   arrayOperation = [];
+   arrayOperation.push(resultTempory);
+   arrayOperation.push("x");
+   screenResult.value = resultTempory;
+ }
+    
+  console.log(arrayOperation);
+}
   
 
 
-  if (arrayOperation.length == 0 && screenResult.value != 0) {
-        
-    arrayOperation.push(screenResult.value);
-    arrayOperation.push("x");
-  } else if (arrayOperation.length ==3 && arrayOperation[0] == 0) {
-    
-    arrayOperation.pop();
-    screenResult.value = "";
-  } else if (arrayOperation.length ==3 && arrayOperation[0] != 0) {
-
-    //llamar a la funcion multiplicar
-    let resultTempory = multiAux(arrayOperation[0],arrayOperation[2]);
-    arrayOperation = [];
-    arrayOperation.push(resultTempory);
-    arrayOperation.push("x");
-    screenResult.value = resultTempory;
-  }
-     
-   console.log(arrayOperation);
-}
+  
 
 function multiAux(item_a , item_b) {
   
