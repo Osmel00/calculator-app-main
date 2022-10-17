@@ -66,13 +66,20 @@ function calcAll(itemKey) {
       break; 
       default:
         
-   
-        screenResult.value += itemKey;
-      
+     if (arrayOperation.length != 0) {
+      var string = screenResult.value;
+      screenResult.value += itemKey;
+      var m = screenResult.value.slice(arrayOperation.length + 1, screenResult.value.length);
+      screenResult.value = screenResult.value.substring(0,string.length);
+      screenResult.value += Number(m);
+     }else {
+      screenResult.value += itemKey;
       var s = screenResult.value;
       screenResult.value = Number(s);
+     }
       
-      break;
+      
+  break;
   }
   
 }
@@ -101,7 +108,7 @@ function check(itemKey) {
     arrayOperation.push(itemKey);
     console.log(arrayOperation);
   }
-  if (arrayOperation.length == 4) {
+  if (arrayOperation.length == 4) {screenResult.length
      screenResult.value = itemKey;
     
   }
