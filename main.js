@@ -58,7 +58,7 @@ function calcAll(itemKey) {
 
     case "reset": resetOperation();
       break;
-    case "=":
+    case "=": equalOperation();
       break;
     case "/":
       break;
@@ -67,11 +67,12 @@ function calcAll(itemKey) {
       default:
         
      if (arrayOperation.length != 0) {
-      var string = screenResult.value;
-      screenResult.value += itemKey;
-      var m = screenResult.value.slice(arrayOperation.length + 1, screenResult.value.length);
-      screenResult.value = screenResult.value.substring(0,string.length);
-      screenResult.value += Number(m);
+      
+      value += itemKey;
+      console.log(resultTempory.length);
+      screenResult.value = screenResult.value.substring(0,resultTempory.length);
+      screenResult.value += Number(value);
+      
      }else {
       screenResult.value += itemKey;
       var s = screenResult.value;
@@ -98,20 +99,23 @@ function resetOperation() {
   resultAux = "";
   screenResult.value = "";
   arrayOperation = [];
-  console.log("boton Eliminar" + ":" + arrayOperation.length);
   console.log(arrayOperation);
 }
 
-function check(itemKey) {
-  if (arrayOperation.length == 2) {
-    screenResult.value = itemKey;
-    arrayOperation.push(itemKey);
-    console.log(arrayOperation);
-  }
-  if (arrayOperation.length == 4) {screenResult.length
-     screenResult.value = itemKey;
+function equalOperation() {
+  console.log(eval(screenResult.value));
+}
+function check(array) {
+  
+  let keyOperation = array[array.length-1];
+  if (((array[0] == '0') && (keyOperation == ' ')) || keyOperation == "+" || keyOperation == "-" || keyOperation == "x" || keyOperation == "/" ) {
+    console.log(keyOperation);
+    return true;
     
   }
+  console.log(keyOperation);
+  return false;
+  
 }
 
 function sum(item_a, item_b) {
@@ -119,11 +123,23 @@ function sum(item_a, item_b) {
 }
 
 function additionOperation() {
- resultTempory = screenResult.value += " " + "+" + " " ;
- arrayOperation = resultTempory.split(" ");
- int = "";
- value = ""; 
-  console.log(arrayOperation);
+   if(screenResult.value == ""){
+    screenResult.value = "0" + " " + "+" + " " ;
+    resultTempory = screenResult.value;
+    arrayOperation = resultTempory.split("");
+    value = "";
+   } else {
+     arrayTemp = screenResult.value.split("");
+    if (!check(arrayTemp)){ 
+    resultTempory = screenResult.value += " " + "+" + " " ;
+    arrayOperation = resultTempory.split(" ");
+    value = ""; 
+    console.log(arrayOperation);
+   }
+
+
+  }
+ 
 }
 
   
@@ -132,50 +148,24 @@ function additionOperation() {
 
 
 function multiOperation() {                 /////////////// estoy aqui.**************************************////////
-    
-  let resultTempory = "";
-  if (arrayOperation.length == 0 && screenResult.value == 0) {
-        
-    arrayOperation.push(0);
-    arrayOperation.push("x");
-   } else if (arrayOperation.length == 0 && screenResult.value != 0){
-    arrayOperation.push(screenResult.value);
-    arrayOperation.push("x");
-   }
-   else if (arrayOperation.length == 2) {
-        
-    if(arrayOperation[0] == "0"){
-     arrayOperation = [];
-     arrayOperation.push(0);
-     arrayOperation.push("x");
-     screenResult.value = "";
-    }  else {
-         // llamar funcion multiplicar
-       resultTempory = multiAux(arrayOperation[0],screenResult.value)
-       arrayOperation = [];
-       arrayOperation.push(resultTempory);
-       arrayOperation.push("x");
-       screenResult.value = resultTempory;
+  if(screenResult.value == ""){
+    screenResult.value = "0" + " " + "*" + " " ;
+    resultTempory = screenResult.value;
+    arrayOperation = resultTempory.split("");
+    value = "";
+   }else {
+      arrayTemp = screenResult.value.split("");
+     if (!check(arrayTemp)){ 
+     resultTempory = screenResult.value += " " + "*" + " " ;
+     arrayOperation = resultTempory.split(" ");
+     value = ""; 
+     console.log(arrayOperation);
     }
-   
-   
-
- } else if (arrayOperation.length == 4 && arrayOperation[0] == 0) {
-   
-   arrayOperation.pop();
-   arrayOperation.pop();
-   screenResult.value = "";
- } else if (arrayOperation.length ==3 && arrayOperation[0] != 0) {
-
-   //llamar a la funcion multiplicar
-   resultTempory = multiAux(arrayOperation[0],arrayOperation[2]);
-   arrayOperation = [];
-   arrayOperation.push(resultTempory);
-   arrayOperation.push("x");
-   screenResult.value = resultTempory;
- }
-    
-  console.log(arrayOperation);
+ 
+ 
+   }
+  
+  
 }
   
 
@@ -188,19 +178,6 @@ function multiAux(item_a , item_b) {
 }
 
 
-function equalOperation() {
-  if (arrayOperation.length == 3) {
-    switch (arrayOperation[1]) {
-      case "+":
-        let valueSum = sum(arrayOperation[0], arrayOperation[2]);
-        screenResult.value = valueSum;
-        break;
-
-      default:
-        break;
-    }
-  }
-}
 
 
 
