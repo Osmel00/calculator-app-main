@@ -25,13 +25,15 @@ const arrayKeyNummber = [...keyboard_numbers];
 const arrayKeyShadows = [...keyboard_borders];
 let resultAux;
 let arrayOperation = new Array();
-let int = "";
+let numDecimal = "";
 let value = "";
  //console.log(eval('1+3*7-2'));
-
+//let num = '232'
 const keyValues = document.querySelectorAll(".keyValues");
-//console.log(keyValues);
+let expregr = /^([0-9]{1,10}(\.[0-9]{1,7})?)$/g ;
+//console.log(num.match(expregr)!=null); 
 
+ 
 keyValues.forEach((item) => {
   item.addEventListener("click", () => {
     
@@ -62,28 +64,88 @@ function calcAll(itemKey) {
       break;
     case "/":
       break;
-    case ".":
+
+
+    case ".": 
+              numDecimalValidation(); //////////////// estoy aqui//////////////////////////
+              console.log('estoy aqui');
       break; 
+
+
+
       default:
         
      if (arrayOperation.length != 0) {
+         
+          //numDecimal = screenResult.value.substring(resultTempory.length, -1);    
+        if(screenResult.value.length > resultTempory.length) {
+          numDecimal = screenResult.value.substring(resultTempory.length,screenResult.value.length); 
+          if(numDecimal.includes('.')){
+            if(!numDecimal.endsWith('.')){
+              if(numDecimal.match(expregr)!=null) {
+                screenResult.value += itemKey;
+  
+             }
+             }else {
+
+              screenResult.value += itemKey;
+             }
+          } else {
+
+            value += itemKey;
+            //console.log(resultTempory.length);
+            screenResult.value = screenResult.value.substring(0,resultTempory.length);
+            screenResult.value += Number(value);
+          }
+           
+          
+          }else {
+
+            value += itemKey;
+            //console.log(resultTempory.length);
+            screenResult.value = screenResult.value.substring(0,resultTempory.length);
+            screenResult.value += Number(value);
+          }
+          
+          
       
-      value += itemKey;
-      console.log(resultTempory.length);
-      screenResult.value = screenResult.value.substring(0,resultTempory.length);
-      screenResult.value += Number(value);
       
      }else {
-      screenResult.value += itemKey;
-      var s = screenResult.value;
-      screenResult.value = Number(s);
-     }
+      
+
+        screenResult.value += itemKey;
+        var s = screenResult.value;
+        if(!screenResult.value.includes(".0") && !(screenResult.value.includes('.') && itemKey == '0')){
+        screenResult.value = Number(s);
+      }
+      
+      }
+      
+     
       
       
   break;
   }
   
 }
+
+ function numDecimalValidation() {
+
+    if (screenResult.value != "" && arrayOperation.length == 0) {
+         if (!screenResult.value.includes(".")) {
+          
+          screenResult.value += ".";
+         }
+    }else if (screenResult.value != "" && arrayOperation.length != 0)  {
+            
+            let arr = screenResult.value.split(" ");
+            console.log(arr);
+            if(arr[arr.length-1].match(expregr)!= null && !arr[arr.length-1].includes('.') ) {
+              screenResult.value += ".";
+              
+            }
+    }
+ }
 
 function delOperation() {
   if (arrayOperation.length == 0) {
@@ -108,7 +170,8 @@ function equalOperation() {
 function check(array) {
   
   let keyOperation = array[array.length-1];
-  if (((array[0] == '0') && (keyOperation == ' ')) || keyOperation == "+" || keyOperation == "-" || keyOperation == "x" || keyOperation == "/" ) {
+  let num = keyOperation.match(expregr);
+  if (((array[0] == '0') && (keyOperation == ' ')) || (num == null)) {
     console.log(keyOperation);
     return true;
     
@@ -126,10 +189,10 @@ function additionOperation() {
    if(screenResult.value == ""){
     screenResult.value = "0" + " " + "+" + " " ;
     resultTempory = screenResult.value;
-    arrayOperation = resultTempory.split("");
+    arrayOperation = resultTempory.split(" ");
     value = "";
    } else {
-     arrayTemp = screenResult.value.split("");
+     arrayTemp = screenResult.value.split(" ");
     if (!check(arrayTemp)){ 
     resultTempory = screenResult.value += " " + "+" + " " ;
     arrayOperation = resultTempory.split(" ");
@@ -151,10 +214,10 @@ function multiOperation() {                 /////////////// estoy aqui.*********
   if(screenResult.value == ""){
     screenResult.value = "0" + " " + "*" + " " ;
     resultTempory = screenResult.value;
-    arrayOperation = resultTempory.split("");
+    arrayOperation = resultTempory.split(" ");
     value = "";
    }else {
-      arrayTemp = screenResult.value.split("");
+      arrayTemp = screenResult.value.split(" ");
      if (!check(arrayTemp)){ 
      resultTempory = screenResult.value += " " + "*" + " " ;
      arrayOperation = resultTempory.split(" ");
