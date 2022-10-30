@@ -27,25 +27,22 @@ let resultAux;
 let arrayOperation = new Array();
 let numDecimal = "";
 let value = "";
- //console.log(eval('1+3*7-2'));
-//let num = '232'
+//console.log(eval('1+3*7-2'));
+//let num = 2322.3333;
+//console.log(typeof(num));
 const keyValues = document.querySelectorAll(".keyValues");
-let expregr = /^([0-9]{1,10}(\.[0-9]{1,7})?)$/g ;
-//console.log(num.match(expregr)!=null); 
+let expregr = /^([0-9]{1,10}(\.[0-9]{1,4})?)$/g;
+//console.log(num.match(expregr)!= null);
+//console.log (num.indexOf("."));
 
- 
 keyValues.forEach((item) => {
   item.addEventListener("click", () => {
-    
-  
     calcAll(item.lastElementChild.innerHTML);
-    
   });
 });
 
 function calcAll(itemKey) {
   switch (itemKey) {
-   
     case "del":
       break;
     case "+":
@@ -55,97 +52,89 @@ function calcAll(itemKey) {
     case "-":
       break;
 
-    case "x": multiOperation();
+    case "x":
+      multiOperation();
       break;
 
-    case "reset": resetOperation();
+    case "reset":
+      resetOperation();
       break;
-    case "=": equalOperation();
+    case "=":
+      equalOperation();
       break;
     case "/":
       break;
 
+    case ".":
+      numDecimalValidation(); //////////////// estoy aqui//////////////////////////
 
-    case ".": 
-              numDecimalValidation(); //////////////// estoy aqui//////////////////////////
-              console.log('estoy aqui');
-      break; 
+      break;
 
-
-
-      default:
-        
-     if (arrayOperation.length != 0) {
-         
-          //numDecimal = screenResult.value.substring(resultTempory.length, -1);    
-        if(screenResult.value.length > resultTempory.length) {
-          numDecimal = screenResult.value.substring(resultTempory.length,screenResult.value.length); 
-          if(numDecimal.includes('.')){
-            if(!numDecimal.endsWith('.')){
-              if(numDecimal.match(expregr)!=null) {
+    default:
+      if (arrayOperation.length != 0) {
+        //numDecimal = screenResult.value.substring(resultTempory.length, -1);
+        if (screenResult.value.length > resultTempory.length) {
+          numDecimal = screenResult.value.substring(
+            resultTempory.length,
+            screenResult.value.length
+          );
+          if (numDecimal.includes(".")) {
+            if (!numDecimal.endsWith(".")) {
+              if (numDecimal.match(expregr) != null) {
                 screenResult.value += itemKey;
-  
-             }
-             }else {
-
+              }
+            } else {
               screenResult.value += itemKey;
-             }
+            }
           } else {
-
             value += itemKey;
             //console.log(resultTempory.length);
-            screenResult.value = screenResult.value.substring(0,resultTempory.length);
+            screenResult.value = screenResult.value.substring(
+              0,
+              resultTempory.length
+            );
             screenResult.value += Number(value);
           }
-           
-          
-          }else {
-
-            value += itemKey;
-            //console.log(resultTempory.length);
-            screenResult.value = screenResult.value.substring(0,resultTempory.length);
-            screenResult.value += Number(value);
-          }
-          
-          
-      
-      
-     }else {
-      
-
+        } else {
+          value += itemKey;
+          //console.log(resultTempory.length);
+          screenResult.value = screenResult.value.substring(
+            0,
+            resultTempory.length
+          );
+          screenResult.value += Number(value);
+        }
+      } else {
         screenResult.value += itemKey;
         var s = screenResult.value;
-        if(!screenResult.value.includes(".0") && !(screenResult.value.includes('.') && itemKey == '0')){
-        screenResult.value = Number(s);
+        if (
+          !screenResult.value.includes(".0") &&
+          !(screenResult.value.includes(".") && itemKey == "0")
+        ) {
+          screenResult.value = Number(s);
+        }
       }
-      
-      }
-      
-     
-      
-      
-  break;
+
+      break;
   }
-  
 }
 
- function numDecimalValidation() {
-
-    if (screenResult.value != "" && arrayOperation.length == 0) {
-         if (!screenResult.value.includes(".")) {
-          
-          screenResult.value += ".";
-         }
-    }else if (screenResult.value != "" && arrayOperation.length != 0)  {
-            
-            let arr = screenResult.value.split(" ");
-            console.log(arr);
-            if(arr[arr.length-1].match(expregr)!= null && !arr[arr.length-1].includes('.') ) {
-              screenResult.value += ".";
-              
-            }
+function numDecimalValidation() {
+  if (screenResult.value != "" && arrayOperation.length == 0) {
+    if (!screenResult.value.includes(".")) {
+      screenResult.value += ".";
     }
- }
+  } else if (screenResult.value != "" && arrayOperation.length != 0) {
+    let arr = screenResult.value.split(" ");
+    console.log(arr);
+    if (
+      arr[arr.length - 1].match(expregr) != null &&
+      !arr[arr.length - 1].includes(".")
+    ) {
+      screenResult.value += ".";
+    }
+  }
+}
 
 function delOperation() {
   if (arrayOperation.length == 0) {
@@ -165,20 +154,35 @@ function resetOperation() {
 }
 
 function equalOperation() {
-  console.log(eval(screenResult.value));
+  ///////////////////////// estoy aqui /////////////////////////////////
+
+  let numtempo = eval(screenResult.value);
+  //let cont = toString(numtempo).indexOf(".");
+  let cont = numtempo.toString();
+  numtempo = cont;
+  cont = cont.indexOf(".");
+  console.log(cont);
+  console.log(typeof cont);
+  if (cont != -1) {
+    if (numtempo.length - (cont + 1) > 2) {
+      screenResult.value = numtempo.substring(0, cont + 3);
+    } else {
+      screenResult.value = numtempo;
+    }
+  } else {
+    screenResult.value = numtempo;
+  }
 }
+
 function check(array) {
-  
-  let keyOperation = array[array.length-1];
+  let keyOperation = array[array.length - 1];
   let num = keyOperation.match(expregr);
-  if (((array[0] == '0') && (keyOperation == ' ')) || (num == null)) {
+  if ((array[0] == "0" && keyOperation == " ") || num == null) {
     console.log(keyOperation);
     return true;
-    
   }
   console.log(keyOperation);
   return false;
-  
 }
 
 function sum(item_a, item_b) {
@@ -186,66 +190,42 @@ function sum(item_a, item_b) {
 }
 
 function additionOperation() {
-   if(screenResult.value == ""){
-    screenResult.value = "0" + " " + "+" + " " ;
+  if (screenResult.value == "") {
+    screenResult.value = "0" + " " + "+" + " ";
     resultTempory = screenResult.value;
     arrayOperation = resultTempory.split(" ");
     value = "";
-   } else {
-     arrayTemp = screenResult.value.split(" ");
-    if (!check(arrayTemp)){ 
-    resultTempory = screenResult.value += " " + "+" + " " ;
-    arrayOperation = resultTempory.split(" ");
-    value = ""; 
-    console.log(arrayOperation);
-   }
-
-
-  }
- 
-}
-
-  
-
-  
-
-
-function multiOperation() {                 /////////////// estoy aqui.**************************************////////
-  if(screenResult.value == ""){
-    screenResult.value = "0" + " " + "*" + " " ;
-    resultTempory = screenResult.value;
-    arrayOperation = resultTempory.split(" ");
-    value = "";
-   }else {
-      arrayTemp = screenResult.value.split(" ");
-     if (!check(arrayTemp)){ 
-     resultTempory = screenResult.value += " " + "*" + " " ;
-     arrayOperation = resultTempory.split(" ");
-     value = ""; 
-     console.log(arrayOperation);
+  } else {
+    arrayTemp = screenResult.value.split(" ");
+    if (!check(arrayTemp)) {
+      resultTempory = screenResult.value += " " + "+" + " ";
+      arrayOperation = resultTempory.split(" ");
+      value = "";
+      console.log(arrayOperation);
     }
- 
- 
-   }
-  
-  
+  }
 }
-  
 
+function multiOperation() {
+  if (screenResult.value == "") {
+    screenResult.value = "0" + " " + "*" + " ";
+    resultTempory = screenResult.value;
+    arrayOperation = resultTempory.split(" ");
+    value = "";
+  } else {
+    arrayTemp = screenResult.value.split(" ");
+    if (!check(arrayTemp)) {
+      resultTempory = screenResult.value += " " + "*" + " ";
+      arrayOperation = resultTempory.split(" ");
+      value = "";
+      console.log(arrayOperation);
+    }
+  }
+}
 
-  
-
-function multiAux(item_a , item_b) {
-  
+function multiAux(item_a, item_b) {
   return Number(item_a) * Number(item_b);
 }
-
-
-
-
-
-
-
 
 switch_2.addEventListener("click", () => {
   updateTheme(switchPositions()); // Change the themes
