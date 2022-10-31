@@ -28,12 +28,12 @@ let arrayOperation = new Array();
 let numDecimal = "";
 let value = "";
 //console.log(eval('1+3*7-2'));
-//let num = 2322.3333;
+//let num = '9.695';
 //console.log(typeof(num));
 const keyValues = document.querySelectorAll(".keyValues");
-let expregr = /^([0-9]{1,10}(\.[0-9]{1,4})?)$/g;
+let expregr = /^([+-]?[0-9]{1,10}(\.[0-9]{1,4})?)$/g;
 //console.log(num.match(expregr)!= null);
-//console.log (num.indexOf("."));
+//console.log (num.indexOf("."));git
 
 keyValues.forEach((item) => {
   item.addEventListener("click", () => {
@@ -49,7 +49,7 @@ function calcAll(itemKey) {
       additionOperation();
       break;
 
-    case "-":
+    case "-":substraccionOperation();
       break;
 
     case "x":
@@ -66,7 +66,7 @@ function calcAll(itemKey) {
       break;
 
     case ".":
-      numDecimalValidation(); //////////////// estoy aqui//////////////////////////
+      numDecimalValidation(); 
 
       break;
 
@@ -154,7 +154,7 @@ function resetOperation() {
 }
 
 function equalOperation() {
-  ///////////////////////// estoy aqui /////////////////////////////////
+  
 
   let numtempo = eval(screenResult.value);
   //let cont = toString(numtempo).indexOf(".");
@@ -189,6 +189,25 @@ function sum(item_a, item_b) {
   return Number(item_a) + Number(item_b);
 }
 
+///////////////////////// estoy aqui ////////////////////////////////////////////////////////////////////
+ function substraccionOperation()
+ {
+  if (screenResult.value == "") {
+    screenResult.value = "0" + " " + "-" + " ";
+    resultTempory = screenResult.value;
+    arrayOperation = resultTempory.split(" ");
+    value = "";
+  } else {
+    arrayTemp = screenResult.value.split(" ");
+    if (!check(arrayTemp)) {
+      resultTempory = screenResult.value += " " + "-" + " ";
+      arrayOperation = resultTempory.split(" ");
+      value = "";
+      console.log(arrayOperation);
+    }
+  }
+      
+ }
 function additionOperation() {
   if (screenResult.value == "") {
     screenResult.value = "0" + " " + "+" + " ";
