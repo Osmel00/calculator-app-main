@@ -152,26 +152,38 @@ function resetOperation() {
   arrayOperation = [];
   console.log(arrayOperation);
 }
+function auxEqualOp() {
+ let arrayString = "";
+ arrayString = screenResult.value;
+ arrayString = arrayString.trimEnd();
+ console.log(arrayString.length);
+ let op = arrayString.charAt(arrayString.length-1);
+ if (op!='+' && op!='*' && op!='/' && op!='-' ){
+      return true;
+ }
+   return false;
+}
+  function equalOperation() {
+     if(arrayOperation.length != 0 && screenResult.value != "" && auxEqualOp()){
+      let numtempo = eval(screenResult.value);//*******despues del resultado entro numero y da error tambien////////////////
+      
+      let cont = numtempo.toString();
+      numtempo = cont;
+      cont = cont.indexOf(".");
+      console.log(cont);
+      console.log(typeof cont);
+      if (cont != -1) {
+        if (numtempo.length - (cont + 1) > 2) {
+          screenResult.value = numtempo.substring(0, cont + 3);
+        } else {
+          screenResult.value = numtempo;
+        }
+      } else {
+        screenResult.value = numtempo;
+      }
+   }
 
-function equalOperation() {
   
-
-  let numtempo = eval(screenResult.value);
-  //let cont = toString(numtempo).indexOf(".");
-  let cont = numtempo.toString();
-  numtempo = cont;
-  cont = cont.indexOf(".");
-  console.log(cont);
-  console.log(typeof cont);
-  if (cont != -1) {
-    if (numtempo.length - (cont + 1) > 2) {
-      screenResult.value = numtempo.substring(0, cont + 3);
-    } else {
-      screenResult.value = numtempo;
-    }
-  } else {
-    screenResult.value = numtempo;
-  }
 }
 
 function check(array) {
