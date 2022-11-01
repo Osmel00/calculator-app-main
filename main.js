@@ -27,6 +27,7 @@ let resultAux;
 let arrayOperation = new Array();
 let numDecimal = "";
 let value = "";
+let flagEqualOp = false;
 //console.log(eval('1+3*7-2'));
 //let num = '9.695';
 //console.log(typeof(num));
@@ -43,7 +44,7 @@ keyValues.forEach((item) => {
 
 function calcAll(itemKey) {
   switch (itemKey) {
-    case "del":
+    case "del": delOperation();
       break;
     case "+":
       additionOperation();
@@ -62,7 +63,7 @@ function calcAll(itemKey) {
     case "=":
       equalOperation();
       break;
-    case "/":
+    case "/": divisionOperation();
       break;
 
     case ".":
@@ -71,6 +72,13 @@ function calcAll(itemKey) {
       break;
 
     default:
+        
+       if(flagEqualOp) {  // borrar la pantalla y ecribir el nuevo valor
+            resetOperation();
+            flagEqualOp = false;
+            console.log(flagEqualOp);
+       }
+       
       if (arrayOperation.length != 0) {
         //numDecimal = screenResult.value.substring(resultTempory.length, -1);
         if (screenResult.value.length > resultTempory.length) {
@@ -137,13 +145,26 @@ function numDecimalValidation() {
 }
 
 function delOperation() {
-  if (arrayOperation.length == 0) {
-    screenResult.value = "";
+  if (!arrayOperation.length == 0 && !screenResult.value == "") {
+    let arraaux = [];
+    arraaux = screenResult.value.split("");
+    arraaux.pop();
+    screenResult.value = arraaux.join("");
+    
+     if( screenResult.value.endsWith('+') || screenResult.value.endsWith('-') || screenResult.value.endsWith('/') || screenResult.value.endsWith('*') )
+     {
+      arraaux.pop();
+      arraaux.pop();
+      screenResult.value = arraaux.join(""); 
+      value = "";
+     }
+  } else if (arrayOperation.length == 0 && !screenResult.value == "" ){
+    let arraaux = [];
+    arraaux = screenResult.value.split("");
+    arraaux.pop();
+    screenResult.value = arraaux.join("");
   }
-  if (arrayOperation.length == 3) {
-    arrayOperation.pop();
-    screenResult.value = 0;
-  }
+  console.log(arrayOperation);
 }
 function resetOperation() {
   //clear the screen
@@ -156,7 +177,7 @@ function auxEqualOp() {
  let arrayString = "";
  arrayString = screenResult.value;
  arrayString = arrayString.trimEnd();
- console.log(arrayString.length);
+ 
  let op = arrayString.charAt(arrayString.length-1);
  if (op!='+' && op!='*' && op!='/' && op!='-' ){
       return true;
@@ -165,13 +186,12 @@ function auxEqualOp() {
 }
   function equalOperation() {
      if(arrayOperation.length != 0 && screenResult.value != "" && auxEqualOp()){
-      let numtempo = eval(screenResult.value);//*******despues del resultado entro numero y da error tambien////////////////
-      
+      let numtempo = eval(screenResult.value);
+      flagEqualOp = true;
       let cont = numtempo.toString();
       numtempo = cont;
       cont = cont.indexOf(".");
-      console.log(cont);
-      console.log(typeof cont);
+     
       if (cont != -1) {
         if (numtempo.length - (cont + 1) > 2) {
           screenResult.value = numtempo.substring(0, cont + 3);
@@ -179,11 +199,13 @@ function auxEqualOp() {
           screenResult.value = numtempo;
         }
       } else {
-        screenResult.value = numtempo;
+        if(numtempo === 'NaN'){screenResult.value = 'Error';}
+        else {screenResult.value = numtempo;}
       }
    }
 
-  
+   console.log(arrayOperation);
+   console.log(flagEqualOp);
 }
 
 function check(array) {
@@ -193,7 +215,7 @@ function check(array) {
     console.log(keyOperation);
     return true;
   }
-  console.log(keyOperation);
+  
   return false;
 }
 
@@ -202,6 +224,24 @@ function sum(item_a, item_b) {
 }
 
 ///////////////////////// estoy aqui ////////////////////////////////////////////////////////////////////
+function divisionOperation() {
+  if (screenResult.value == "") {
+    screenResult.value = "0" + " " + "/" + " ";
+    resultTempory = screenResult.value;
+    arrayOperation = resultTempory.split(" ");
+    value = "";
+  } else {
+    arrayTemp = screenResult.value.split(" ");
+    if (!check(arrayTemp)) {
+      resultTempory = screenResult.value += " " + "/" + " ";
+      arrayOperation = resultTempory.split(" ");
+      value = "";
+      
+    }
+  }
+  flagEqualOp = false;
+  console.log(flagEqualOp);
+}
  function substraccionOperation()
  {
   if (screenResult.value == "") {
@@ -215,10 +255,11 @@ function sum(item_a, item_b) {
       resultTempory = screenResult.value += " " + "-" + " ";
       arrayOperation = resultTempory.split(" ");
       value = "";
-      console.log(arrayOperation);
+      
     }
   }
-      
+  flagEqualOp = false;
+  console.log(flagEqualOp);  
  }
 function additionOperation() {
   if (screenResult.value == "") {
@@ -232,9 +273,11 @@ function additionOperation() {
       resultTempory = screenResult.value += " " + "+" + " ";
       arrayOperation = resultTempory.split(" ");
       value = "";
-      console.log(arrayOperation);
+      
     }
   }
+  flagEqualOp = false;
+  console.log(flagEqualOp);
 }
 
 function multiOperation() {
@@ -249,9 +292,11 @@ function multiOperation() {
       resultTempory = screenResult.value += " " + "*" + " ";
       arrayOperation = resultTempory.split(" ");
       value = "";
-      console.log(arrayOperation);
+      
     }
   }
+  flagEqualOp = false;
+  console.log(flagEqualOp);
 }
 
 function multiAux(item_a, item_b) {
