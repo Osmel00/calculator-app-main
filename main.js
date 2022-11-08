@@ -95,13 +95,14 @@ function calcAll(itemKey) {
               screenResult.value += itemKey;
             }
           } else {
-            value += itemKey;
+             //value += itemKey;// hice un cambio aqui ..revisar
+             numDecimal +=itemKey;// asi pincha bien
             //console.log(resultTempory.length);
             screenResult.value = screenResult.value.substring(
               0,
               resultTempory.length
             );
-            screenResult.value += Number(value);
+            screenResult.value += Number(numDecimal);
           }
         } else {
           value += itemKey;
@@ -143,12 +144,13 @@ function numDecimalValidation() {
     }
   }
 }
-
+/// abajo da: error '2 + 8+ y borro el +' 3+5.78+ lo borro y sale 3+5.0 +el numero entrada
 function delOperation() {
   if (!arrayOperation.length == 0 && !screenResult.value == "") {
     let arraaux = [];
     arraaux = screenResult.value.split("");
     arraaux.pop();
+    if(arraaux.length!=0){value = arraaux[arraaux.length-1];}
     screenResult.value = arraaux.join("");
     
      if( screenResult.value.endsWith('+') || screenResult.value.endsWith('-') || screenResult.value.endsWith('/') || screenResult.value.endsWith('*') )
