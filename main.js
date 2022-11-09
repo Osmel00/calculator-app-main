@@ -155,7 +155,7 @@ function delOperation() {
     
      if( screenResult.value.endsWith('+') || screenResult.value.endsWith('-') || screenResult.value.endsWith('/') || screenResult.value.endsWith('*') )
      {
-      arraaux.pop();
+      arraaux.pop();//para actualizar resultTempory recorrer "arraaux" de  atras hacia delante hasta encontrar  un ""
       arraaux.pop();
       screenResult.value = arraaux.join(""); 
       value = "";
