@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,158 +9,160 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/favicon-32x32.png" type="image/x-icon">
 </head>
+
 <body>
     <main class="main-container">
         <div class="header-calc">
             <p class="header-calc_title">calc</p>
             <div class="header-calc_theme">
                 <p class="theme">theme</p>
-                <div class="calc_theme_switch" >
+                <div class="calc_theme_switch">
                     <div class="switch-numbers">
                         <p id="switch-1">1</p>
                         <p id="switch-2">2</p>
                         <p id="switch-3">3</p>
                     </div>
                     <div class="switch-ball"><span id="idBall" class="ball"></span></div>
-                </div> 
+                </div>
             </div>
         </div>
-       
+
         <input type="text" class="screen" id="result" placeholder="0">
-        
+
         <div class="keyboard-container">
-                <div class="keyboard-container_numbers keyValues">
-                    
-                     <div class="keyboard_borders"></div>
-                     <div class="keyboard_numbers"></div>
-                     <p class="pararaph-num" id="seven">7</p>
-                </div>
-                
-                <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="eight">8</p>
-               </div>
+            <div class="keyboard-container_numbers keyValues">
 
-               <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="nine">9</p>
-               </div>
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="seven">7</p>
+            </div>
 
-               <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders del-bg-shadow" id="del-bg-shadow"></div>
-                    <div class="keyboard_numbers del-bg-color" id="del-bg-color"></div>
-                    <p class="pararaph-num del" id="dele">del</p>
-               </div>
-               
-               <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="four">4</p>
-              </div>
+            <div class="keyboard-container_numbers keyValues">
 
-              <div class="keyboard-container_numbers keyValues">
-                    
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="eight">8</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="nine">9</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders del-bg-shadow" id="del-bg-shadow"></div>
+                <div class="keyboard_numbers del-bg-color" id="del-bg-color"></div>
+                <p class="pararaph-num del" id="dele">del</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="four">4</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
                 <div class="keyboard_borders"></div>
                 <div class="keyboard_numbers"></div>
                 <p class="pararaph-num" id="five">5</p>
-              </div>
+            </div>
 
-               <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="six">6</p>
-               </div>    
+            <div class="keyboard-container_numbers keyValues">
 
-               <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="plus">+</p>
-                </div>
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="six">6</p>
+            </div>
 
-                <div class="keyboard-container_numbers keyValues">
-                    
-                        <div class="keyboard_borders"></div>
-                        <div class="keyboard_numbers"></div>
-                        <p class="pararaph-num" id="one">1</p>
-                </div>
-                
-                <div class="keyboard-container_numbers keyValues">
-                    
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="two">2</p>
-               </div>
-               
-               <div class="keyboard-container_numbers keyValues">
-                   
-                   <div class="keyboard_borders"></div>
-                   <div class="keyboard_numbers"></div>
-                   <p class="pararaph-num" id="three">3</p>
-              </div>
+            <div class="keyboard-container_numbers keyValues">
 
-              <div class="keyboard-container_numbers keyValues">
-                   
-                    <div class="keyboard_borders"></div>
-                    <div class="keyboard_numbers"></div>
-                    <p class="pararaph-num" id="minus">-</p>
-             </div>
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="plus">+</p>
+            </div>
 
-             <div class="keyboard-container_numbers keyValues">
-                   
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="one">1</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="two">2</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="three">3</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="minus">-</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
                 <div class="keyboard_borders"></div>
                 <div class="keyboard_numbers"></div>
                 <p class="pararaph-num" id="point">.</p>
-              </div>
-             
-             <div class="keyboard-container_numbers keyValues">
-                   
-                   <div class="keyboard_borders"></div>
-                   <div class="keyboard_numbers"></div>
-                   <p class="pararaph-num" id="cero">0</p>
-              </div>
+            </div>
 
-             <div class="keyboard-container_numbers keyValues">
-                   
-                   <div class="keyboard_borders"></div>
-                   <div class="keyboard_numbers"></div>
-                   <p class="pararaph-num" id="split">/</p>
-              </div>
+            <div class="keyboard-container_numbers keyValues">
 
-               <div class="keyboard-container_numbers keyValues">
-                   
-                       <div class="keyboard_borders"></div>
-                       <div class="keyboard_numbers"></div>
-                       <p class="pararaph-num" id="multiply">x</p>
-               </div>
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="cero">0</p>
+            </div>
 
-               <div class="keyboard-container-btn btn-reset keyValues">
-                   
-                    <div class="keyboard_borders_reset"></div>
-                    <div class="keyboard_numbers_reset"></div>
-                    <p class="pararaph-num" id="reset">reset</p>
-              </div>
+            <div class="keyboard-container_numbers keyValues">
 
-              <div class="keyboard-container-btn btn-equal keyValues" id="btn-equal">
-                   
-                    <div class="keyboard_borders_equal"></div>
-                    <div class="keyboard_numbers_equal"></div>
-                    <p class="pararaph-num" id="equal">=</p>
-             </div>
-        
-        
-        
-        
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="split">/</p>
+            </div>
+
+            <div class="keyboard-container_numbers keyValues">
+
+                <div class="keyboard_borders"></div>
+                <div class="keyboard_numbers"></div>
+                <p class="pararaph-num" id="multiply">x</p>
+            </div>
+
+            <div class="keyboard-container-btn btn-reset keyValues">
+
+                <div class="keyboard_borders_reset"></div>
+                <div class="keyboard_numbers_reset"></div>
+                <p class="pararaph-num" id="reset">reset</p>
+            </div>
+
+            <div class="keyboard-container-btn btn-equal keyValues" id="btn-equal">
+
+                <div class="keyboard_borders_equal"></div>
+                <div class="keyboard_numbers_equal"></div>
+                <p class="pararaph-num" id="equal">=</p>
+            </div>
+
+
+
+
         </div>
     </main>
-       
+
     <script src="main.js"></script>
 </body>
+
 </html>

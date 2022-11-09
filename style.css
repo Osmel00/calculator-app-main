@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap");
 :root {
   --white: white;
-  --black:black;
+  --black: black;
   --main_background: hsl(222, 26%, 31%);
   --toggle_background_keypad: hsl(223, 31%, 20%);
   --screen_background: hsl(224, 36%, 15%);
@@ -96,6 +96,10 @@ body {
   cursor: pointer;
 }
 
+.switch-numbers p {
+  padding: 0 6px;
+}
+
 .switch-ball {
   width: 71px;
   height: 24px;
@@ -149,6 +153,7 @@ body {
   width: 65px;
   height: 68px;
   cursor: pointer;
+  justify-content: center;
 }
 
 .keyboard_numbers {
@@ -186,6 +191,7 @@ body {
   width: 140px;
   height: 64px;
   cursor: pointer;
+  justify-content: center;
 }
 
 .btn-reset {
@@ -236,7 +242,8 @@ body {
   grid-row: 1/2;
 }
 
-.btn-reset p, .del {
+.btn-reset p,
+.del {
   font-size: 15px;
   color: white;
 }
@@ -272,12 +279,14 @@ body {
   color: var(--Very_dark_yellow_Theme_2);
 }
 
-.switch-ball_theme2, .keyboard-container_theme2 {
+.switch-ball_theme2,
+.keyboard-container_theme2 {
   background: var(--toggle_background_keypad_Theme_2);
 }
 
 .screen_theme2 {
   background: var(--screen_background_Theme_2);
+  color: var(--black);
 }
 
 .screen_theme2::-moz-placeholder {
@@ -296,11 +305,13 @@ body {
   background: var(--key_background_Theme_2_nummber);
 }
 
-.del-bg-color_theme2, .keyboard_numbers_reset_theme2 {
+.del-bg-color_theme2,
+.keyboard_numbers_reset_theme2 {
   background-color: var(--key_del_background_Theme_2);
 }
 
-.del-bg-shadow_theme2, .keyboard_borders_reset_theme2 {
+.del-bg-shadow_theme2,
+.keyboard_borders_reset_theme2 {
   background-color: var(--key_del_shadow_Theme_2);
 }
 
@@ -312,11 +323,14 @@ body {
   color: var(--Light_yellow_Theme_3);
 }
 
-.switch-ball_theme3, .keyboard-container_theme3, .screen_theme3 {
+.switch-ball_theme3,
+.keyboard-container_theme3,
+.screen_theme3 {
   background: var(--Very_dark_violet_Theme_3);
 }
 
-.ball_theme3, .keyboard_numbers_equal_theme3 {
+.ball_theme3,
+.keyboard_numbers_equal_theme3 {
   background: var(--Pure_cyan_key_Theme_3);
 }
 
@@ -344,11 +358,13 @@ body {
   background: var(--Dark_magenta_key_shadow_Theme_3);
 }
 
-.del-bg-color_theme3, .keyboard_numbers_reset_theme3 {
+.del-bg-color_theme3,
+.keyboard_numbers_reset_theme3 {
   background: var(--Dark_violet_key_background_Theme_3);
 }
 
-.del-bg-shadow_theme3, .keyboard_borders_reset_theme3 {
+.del-bg-shadow_theme3,
+.keyboard_borders_reset_theme3 {
   background: var(--Vivid_magenta_key_shadow_Theme_3);
 }
 
@@ -366,4 +382,41 @@ body {
 
 #dele_theme3 {
   color: var(--white);
+}
+
+@media (min-width: 1024px) {
+  .main-container {
+    width: 544px;
+    height: 718px;
+  }
+  .keyboard-container {
+    width: 100%;
+    height: 488px;
+    padding: 20px;
+  }
+  .keyboard_numbers {
+    width: 100px;
+    height: 68px;
+  }
+  .keyboard_borders {
+    width: 100px;
+    height: 68px;
+  }
+  .keyboard_numbers_reset,
+.keyboard_numbers_equal {
+    width: 215px;
+    height: 64px;
+  }
+  .keyboard_borders_reset,
+.keyboard_borders_equal {
+    width: 215px;
+    height: 64px;
+  }
+  #dele,
+#reset {
+    font-size: 20px;
+  }
+  #equal {
+    font-size: 35px;
+  }
 }/*# sourceMappingURL=style.css.map */

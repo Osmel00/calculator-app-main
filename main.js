@@ -32,7 +32,7 @@ let flagEqualOp = false;
 //let num = '9.695';
 //console.log(typeof(num));
 const keyValues = document.querySelectorAll(".keyValues");
-let expregr = /^([+-]?[0-9]{1,10}(\.[0-9]{1,4})?)$/g;
+let expregr = /^([+-]?[0-9]{1,10}(\.[0-9]{1,9})?)$/g;
 //console.log(num.match(expregr)!= null);
 //console.log (num.indexOf("."));git
 
@@ -158,6 +158,10 @@ function delOperation() {
       arraaux.pop();//para actualizar resultTempory recorrer "arraaux" de  atras hacia delante hasta encontrar  un ""
       arraaux.pop();
       screenResult.value = arraaux.join(""); 
+      arraaux = screenResult.value.split(" ");
+      arraaux.pop();
+      resultTempory = arraaux.join(" ");
+      resultTempory+=" "; 
       value = "";
      }
   } else if (arrayOperation.length == 0 && !screenResult.value == "" ){
